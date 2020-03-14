@@ -26,8 +26,8 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NuGetAPIKey }}
 
-#    - name: Restore NuGet Packages
-#      run: dotnet restore TBAAPI.V3Client.sln
+    - name: Restore NuGet Packages
+      run: dotnet restore TBAAPI.V3Client.sln
 
     - name: Build
       run: dotnet build --configuration Release TBAAPI.V3Client.sln

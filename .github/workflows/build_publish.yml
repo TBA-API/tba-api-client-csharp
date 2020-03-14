@@ -1,0 +1,42 @@
+name: .NET Core
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Build
+      shell: bash
+      run: ./build.sh
+    - name: Test
+      shell: sh
+      run: ./mono_nunit_test.sh
+#    - name: Publish
+#      shell: bash
+#      run: dotnet nuget push 
+#    - name: Publish to NuGet
+#      uses: rohith/publish-nuget@v2.1.2
+#      with:
+#        # Filepath of the project to be packaged, relative to root of repository
+#        PROJECT_FILE_PATH: TBAAPI.V3Client.sln
+#        # Filepath containing version info, relative to root of repository. Defaults to `PROJECT_FILE_PATH` if not specified
+#        VERSION_FILE_PATH: README.md # optional
+#        # Regex (with version in a capturing group) to extract the version from `VERSION_FILE_PATH`
+#        VERSION_REGEX: 'SDK version: ((?:\d\.?)+)' # optional, default is <Version>(.*)<\/Version>
+#        # Whether to create a tag when there's a version change
+#        TAG_COMMIT: false # optional, default is true
+#        # Format of the tag, `*` is the placeholder for actual version
+#        #TAG_FORMAT: # optional, default is v*
+#        # API key for the NuGet feed
+#        NUGET_KEY: ${{ secrets.NuGetAPIKey }} # optional
+#        # NuGet package name, required when it's different from the project name
+#        #PACKAGE_NAME: # optional

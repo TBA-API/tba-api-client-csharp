@@ -16,15 +16,17 @@ jobs:
        
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
      
     - name: Restore NuGet Packages
       run: nuget restore TBAAPI.V3Client.sln
 
-    - name: Build
-      run: dotnet build --configuration Release
+#    - name: Build
+#      run: dotnet build --configuration Release
 
-#    - name: Build and Publish Web App
-#      run: msbuild TBAAPI.V3Client.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    - name: Build and Publish Web App
+      run: msbuild TBAAPI.V3Client.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
  
 
 
